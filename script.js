@@ -10,13 +10,14 @@ const bookmarkScript = (function() {
     $('#bookmarks').on('submit', 'form', event => {
       event.preventDefault(); 
       const title = $('#bookmark-title').val();
-      const website_url = $('#bookmark-url').val();
+      const url = $('#bookmark-url').val();
       const rating = $('#rating').val();
-      const description = $('#bookmark-description').val();
-      const bookmarkObj = {title, website_url, description, rating};
+      const desc = $('#bookmark-description').val();
+      const bookmarkObj = {title, url, desc, rating};
       api.createItem(bookmarkObj)
         .then(bookmark => {
-          store.bookmarks.push(bookmark)
+          store.bookmarks.push(bookmark )
+          console.log(bookmark);
           render();
         }) 
     });

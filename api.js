@@ -6,19 +6,18 @@ const api = (function() {
 
   function getItem(){
     return fetch(`${BASE_URL}`)
-        .then(response => response.json())
-  }
+  };
 
-  function createItem(title, url, desc, rating){
+  function createItem(bookmarkObj){
+    let stringifiedBookmark = JSON.stringify(bookmarkObj);
     return fetch(`${BASE_URL}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({title, url, desc, rating})
-    })
-    .then(response => response.json())
-  }
+        body: stringifiedBookmark 
+    });
+  };
 
   function deleteItem(id){
     return fetch(`${BASE_URL}/${id}`, {
@@ -26,14 +25,13 @@ const api = (function() {
         headers: {
             "Content-Type": "application/json"
         },
-    })
-    .then(response => response.json())
-  } 
+    });
+  };
 
   return {
     getItem,
     createItem,
     deleteItem,
-    }
+  };
     
 })();
