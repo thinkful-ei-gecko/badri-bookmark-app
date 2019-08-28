@@ -6,6 +6,7 @@ const api = (function() {
 
   function getItem(){
     return fetch(`${BASE_URL}`)
+      .then(res=> res.json())
   };
 
   function createItem(bookmarkObj){
@@ -33,5 +34,4 @@ const api = (function() {
     createItem,
     deleteItem,
   };
-    
 })();

@@ -1,79 +1,70 @@
 'use strict'
 
-let bookmarkSection = document.getElementById("bookmarks");
-
-  bookmarkSection.addEventListener("click", function() {
-      console.log("click");
-    //Toggle between adding and removing the "active" class,
-    //to highlight the button that controls the panel 
-    let button = event.target;
-    if (button.tagName !== "BUTTON") {
-        return;
-    } 
-    button.classList.toggle("active");
-
-    //Toggle between hiding and showing the active panel 
-    let panel = button.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-
-
-
 function bookmarkHTML(bookmark) {
-    //if (bookmark.expanded) {
-      /*
-      let i;
-      while (i<bookmark.rating){
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-      }*/
 
-      return `<button class="accordion">${bookmark.title} ${bookmark.rating}</button>
-        <div class="panel">
-            <p>${bookmark.description} <button type="button" class="delete-button">Delete</button></p>
-        </div>`
-      /*return `<li>${bookmark.title} - ${bookmark.description}
-      <button class="close" data-id="${bookmark.id}">Close</button></li>`
+  let ratingStr = '';
+
+  function makeStars(rating) {
+    if (bookmark.rating===5) {
+      return ratingStr = '★★★★★';
+    }
+    if (bookmark.rating===4) {
+      return ratingStr = '★★★★☆';
+    }
+    if (bookmark.rating===3) {
+      return ratingStr = '★★★☆☆';
+    }
+    if (bookmark.rating===2) {
+      return ratingStr = '★★☆☆☆';
     }
     else {
-      return `<li>${bookmark.title}
-      <button class="expand" data-id="${bookmark.id}">Expand</button></li>`
-    }*/
+      return ratingStr = '★☆☆☆☆';
+    }
+  };
+
+  makeStars(bookmark.rating);
+
+  if (bookmark.expanded) {
+    return `<li>${bookmark.title} <li>${bookmark.desc} <button type="button" data-id="${bookmark.id}" class="delete-button">Delete</button></li>
+    <button class="close" data-id="${bookmark.id}">Close</button></li>`
   }
-    
-function generateBookmark() {
-    const myHTML = store.bookmarks.map(bookmark => bookmarkHTML(bookmark));
-    console.log(myHTML);
-    $('#bookmarks').html(myHTML);
+  else {
+    return `<li>${bookmark.title} <span class="display-rating">${ratingStr}</span>
+    <button class="expand" data-id="${bookmark.id}">Expand</button></li>`
+    }
   }
-  
+   
 function handleClose() {
     $('#bookmarks').on('click', '.close', event => {
       event.preventDefault();
       let bookmark = store.bookmarks.find(bookmark => bookmark.id === $(event.target).data('id'));
       bookmark.expanded = false;
-      render();
+      bookmarkScript.render();
     })
   }
 
-  
+
 function handleExpand() {
     $('#bookmarks').on('click', '.expand', event => {
         event.preventDefault();
         let bookmark = store.bookmarks.find(bookmark => bookmark.id == $(event.target).data('id'));
         bookmark.expanded = true;
-        render();
+        bookmarkScript.render();
     })
 }
 
-
+function generateBookmark() {
+    const bookmarks = [...store.bookmarks];
+    if (store.minRating < 1) {
+      const myHTML = bookmarks.map(bookmark => bookmarkHTML(bookmark));
+      $('#bookmarks').html(myHTML);
+    }
+    else {
+      const filtered = bookmarks.filter(bookmark => bookmark.rating >= store.minRating);
+      const myHTML = filtered.map(bookmark => bookmarkHTML(bookmark));
+      $('#bookmarks').html(myHTML);
+    }
+  }
 
 function generateAddBookmarkForm() {
     $('#add-bookmark').on('click', event => {
@@ -91,6 +82,3 @@ function generateAddBookmarkForm() {
         </form>`)
     })
 }
-
-
-//event listener -- transform bookmark data into list items
