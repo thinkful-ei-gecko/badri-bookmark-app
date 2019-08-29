@@ -30,7 +30,7 @@ function bookmarkHTML(bookmark) {
   }
   else {
     return `<li>${bookmark.title} <span class="display-rating">${ratingStr}</span>
-    <button class="expand" data-id="${bookmark.id}"><span>Expand</span></button></li>`
+    <button class="expand" data-id="${bookmark.id}">Expand</button></li>`
     }
   }
    
