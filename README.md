@@ -1,5 +1,11 @@
 # badri-bookmark-app
 
+Kind of ran out of time before being able to really hit the CSS! I apologize... looks pretty boring with some rushed last-minute CSS decorations/
+
+I do not think I handled errors correctly... can attempt to update if necessary. Just ran out of time!
+
+
+
 I can add bookmarks to my bookmark list. Bookmarks contain:
 
 title
