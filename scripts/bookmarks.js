@@ -25,12 +25,12 @@ function bookmarkHTML(bookmark) {
   makeStars(bookmark.rating);
 
   if (bookmark.expanded) {
-    return `<li>${bookmark.title} <li>${bookmark.desc} <a href="${bookmark.url}">Visit Site</a><button type="button" data-id="${bookmark.id}" class="delete-button">Delete</button></li>
+    return `<li class="selected">${bookmark.title} <li>${bookmark.desc} <a href="${bookmark.url}"><span id="site-link">Visit Site</span></a><button type="button" data-id="${bookmark.id}" class="delete-button"><img id="trash" src="https://image.flaticon.com/icons/svg/25/25214.svg"</img></button></li>
     <button class="close" data-id="${bookmark.id}">Close</button></li>`
   }
   else {
     return `<li>${bookmark.title} <span class="display-rating">${ratingStr}</span>
-    <button class="expand" data-id="${bookmark.id}">Expand</button></li>`
+    <button class="expand" data-id="${bookmark.id}"><span>Expand</span></button></li>`
     }
   }
    
