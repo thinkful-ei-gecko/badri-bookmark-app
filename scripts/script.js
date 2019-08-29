@@ -54,6 +54,7 @@ const bookmarkScript = (function() {
     filterRating();
     handleClose();
     handleExpand();
+    renderError();
   }
 
   return {

@@ -7,5 +7,6 @@ $(document).ready(function() {
       .then((bookmark => {
         store.bookmarks = bookmark;
         bookmarkScript.render();
-    }));
+    }))
+    //.catch(err => console.log(err.message)))
 });

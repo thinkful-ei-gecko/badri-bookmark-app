@@ -25,7 +25,7 @@ function bookmarkHTML(bookmark) {
   makeStars(bookmark.rating);
 
   if (bookmark.expanded) {
-    return `<li>${bookmark.title} <li>${bookmark.desc} <button type="button" data-id="${bookmark.id}" class="delete-button">Delete</button></li>
+    return `<li>${bookmark.title} <li>${bookmark.desc} <a href="${bookmark.url}">Visit Site</a><button type="button" data-id="${bookmark.id}" class="delete-button">Delete</button></li>
     <button class="close" data-id="${bookmark.id}">Close</button></li>`
   }
   else {
@@ -71,14 +71,35 @@ function generateAddBookmarkForm() {
         event.preventDefault();
         $('#bookmarks').html(`<form class="bookmark-entry">
         <label for="bookmark-title">Name your bookmark: </label>
-        <input type="text" id="bookmark-title" name="bookmark-title" class="entry" placeholder="Title">
+        <input type="text" id="bookmark-title" name="bookmark-title" class="entry" placeholder="Title" required>
         <label for="bookmark-url">Enter the URL: </label>
-        <input type="text" id="bookmark-url" class="entry" placeholder="https://www.somewhere.com/">
-        <label for="bookmark-description">Enter a description: </label>
+        <input type="url" id="bookmark-url" class="entry" placeholder="https://www.somewhere.com/" required>
+        <label for="bookmark-description">Enter a description(optional): </label>
         <input type="text" id="bookmark-description" class="entry" placeholder="I am Batman">
         <label for="rating"> Rate your bookmark: </label>
         <input type="number" id="rating" name="rating" class="rating" value="1" min="1" max="5">
         <button type="submit" id="addBookmark">Add</button>
         </form>`)
     })
+}
+
+function generateError(message) {
+    return `<section class="error-message"
+      <p>Something went wrong... try again!</p>
+      </section>`;
+}
+
+function renderError() {
+  if (store.error) {
+    const errorHTML = generateError(store.error);
+    $('.error-message').html(errorHTML);
+  }
+  else {
+    $('.error-message').empty();
+  }
+};
+
+function addError(errMessage) {
+  store.error = errMessage;
+  renderError();
 }

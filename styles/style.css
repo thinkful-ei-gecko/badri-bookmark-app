@@ -18,7 +18,8 @@ main {
     border: 1px solid black;
     margin-left: 15px;
     margin-right: 15px;
-
+    border-radius: 2px;
+    background-image: linear-gradient(white, grey);
 }
 
 .display-rating {
@@ -40,6 +41,18 @@ input[type=text] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background-image: linear-gradient(white,lightgrey);
+}
+
+input[type=url] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-image: linear-gradient(white,lightgrey);
 }
 
 #add-bookmark, #addBookmark {
@@ -54,7 +67,7 @@ input[type=text] {
 #min-rating-box {
     background-image: linear-gradient(white,lightgrey);
     float: right;
-    width: 185px;
+    width: inherit;
     padding: 10px;
     height: 40px;
     font:inherit;
